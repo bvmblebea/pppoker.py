@@ -26,10 +26,10 @@ class PPPoker:
 		self.imei = self.generate_imei()
 		self.version = self.get_client_version()["latest_version"]
 
-	def md5hash(self, string: str) -> dict:
+	def md5hash(self, string: str) -> str:
 		return md5(md5(string.encode()).hexdigest().encode()).hexdigest()
 
-	def generate_imei(self) -> dict:
+	def generate_imei(self) -> int:
 		return randint(1000_0000_0000_000, 9000_0000_0000_000)
 
 	def get_client_version(self) -> dict:
