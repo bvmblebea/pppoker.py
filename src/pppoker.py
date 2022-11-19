@@ -26,7 +26,7 @@ class PPPoker:
 		self.imei = self.generate_imei()
 		self.version = self.get_client_version()["latest_version"]
 
-	def md5hash(self, string: str) -> str:
+	def md5_hash(self, string: str) -> str:
 		return md5(md5(string.encode()).hexdigest().encode()).hexdigest()
 
 	def generate_imei(self) -> int:
@@ -56,7 +56,7 @@ class PPPoker:
 			"languagecode": self.language,
 			"operating_company": self.platform,
 			"os": self.platform,
-			"password": self.md5hash(password),
+			"password": self.md5_hash(password),
 			"platform_type": 2,
 			"region": self.region,
 			"sub_distributor": 0,
@@ -77,7 +77,7 @@ class PPPoker:
 			username: str,
 			password: str) -> dict:
 		return requests.get(
-			f"{self.api}/poker/api/register.php?username={username}&password={self.md5hash(password)}&distributor=0&sub_distributor=0&country={self.country}&appid={self.app_id}&os={self.platform}&imei={self.imei}&clientvar={self.version}&ad_id={uuid4()}&region={self.region}&app_type={self.app_type}",
+			f"{self.api}/poker/api/register.php?username={username}&password={self.md5_hash(password)}&distributor=0&sub_distributor=0&country={self.country}&appid={self.app_id}&os={self.platform}&imei={self.imei}&clientvar={self.version}&ad_id={uuid4()}&region={self.region}&app_type={self.app_type}",
 			headers=self.headers).json()
 
 	def get_verification_code(self, email: str, valid_type: int = 1) -> dict:
@@ -140,7 +140,7 @@ class PPPoker:
 			new_password: str,
 			old_password: str) -> dict:
 		return requests.get(
-			f"{self.api}/poker/api/mail/change_pw.php?uid={self.user_id}&password={self.md5hash(new_password)}&old_password={self.md5hash(old_password)}",
+			f"{self.api}/poker/api/mail/change_pw.php?uid={self.user_id}&password={self.md5_hash(new_password)}&old_password={self.md5_hash(old_password)}",
 			headers=self.headers).json()
 
 	def get_ip_address(self) -> dict:
