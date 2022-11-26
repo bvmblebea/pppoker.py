@@ -130,7 +130,7 @@ class PPPoker:
 			data=data,
 			headers=self.headers).json()
 
-	def get_portrait_list(self) -> dict:
+	def get_portraits(self) -> dict:
 		return requests.get(
 			f"{self.first_api}/poker-api/portrait/list?uid={self.user_id}&rdkey={self.rd_key}",
 			headers=self.headers).json()
