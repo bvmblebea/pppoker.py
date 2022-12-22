@@ -169,7 +169,7 @@ class PPPoker:
 			email: str,
 			password: str) -> dict:
 		return requests.get(
-			f"{self.first_api}/poker/api/mail/unlink_mail.php?mail={email}&password={self.md5hash(password)}&uid={self.user_id}",
+			f"{self.first_api}/poker/api/mail/unlink_mail.php?mail={email}&password={self.md5_hash(password)}&uid={self.user_id}",
 			headers=self.headers).json()
 
 	def change_password(
